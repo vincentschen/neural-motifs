@@ -2,7 +2,7 @@
 
 # Train Motifnet using different orderings
 
-export CUDA_VISIBLE_DEVICES=$1
+export CUDA_VISIBLE_DEVICES=$2
 
 if [ $1 == "0" ]; then
     echo "TRAINING MOTIFNET V1"

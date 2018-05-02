@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # This is a script that will evaluate all models for SGCLS
-export CUDA_VISIBLE_DEVICES=$1
+export CUDA_VISIBLE_DEVICES=$2
 
 if [ $1 == "0" ]; then
     echo "EVALING THE BASELINE"
