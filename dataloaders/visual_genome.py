@@ -283,14 +283,18 @@ def load_graphs(graphs_file, mode='train', num_im=-1, num_val_im=0, filter_empty
 
     roi_h5 = h5py.File(graphs_file, 'r')
     data_split = roi_h5['split'][:]
-    split = 2 if mode == 'test' else 0
+    if mode == 'train':
+        split = 0
+    elif mode == 'val': 
+        split = 1
+    else:
+        split = 2
     split_mask = data_split == split
 
     # Filter out images without bounding boxes
     split_mask &= roi_h5['img_to_first_box'][:] >= 0
     if filter_empty_rels:
         split_mask &= roi_h5['img_to_first_rel'][:] >= 0
-
     image_index = np.where(split_mask)[0]
     if num_im > -1:
         image_index = image_index[:num_im]

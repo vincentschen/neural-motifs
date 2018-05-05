@@ -21,8 +21,8 @@ VG_IMAGES = '/dfs/scratch0/vschen/relation-discovery/data/VisualGenome/VG_100K'
 RCNN_CHECKPOINT_FN = path('faster_rcnn_500k.h5')
 
 IM_DATA_FN = stanford_path('image_data.json')
-VG_SGG_FN = stanford_path('VG-SGG.h5')
-VG_SGG_DICT_FN = stanford_path('VG-SGG-dicts.json')
+VG_SGG_FN = stanford_path('10R-full-VG-SGG.h5')
+VG_SGG_DICT_FN = stanford_path('10R-full-VG-SGG-dicts.json')
 PROPOSAL_FN = stanford_path('proposals.h5')
 
 COCO_PATH = '/home/rowan/datasets/mscoco'
@@ -162,7 +162,7 @@ class ModelConfig(object):
         parser.add_argument('-lr', dest='lr', help='learning rate', type=float, default=1e-3)
 
         parser.add_argument('-b', dest='batch_size', help='batch size per GPU',type=int, default=2)
-        parser.add_argument('-val_size', dest='val_size', help='val size to use (if 0 we wont use val)', type=int, default=5000)
+        parser.add_argument('-val_size', dest='val_size', help='val size to use (if 0 we wont use val)', type=int, default=0)
 
         parser.add_argument('-l2', dest='l2', help='weight decay', type=float, default=1e-4)
         parser.add_argument('-clip', dest='clip', help='gradients will be clipped to have norm less than this', type=float, default=5.0)
