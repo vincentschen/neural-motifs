@@ -21,8 +21,8 @@ VG_IMAGES = '/dfs/scratch0/vschen/relation-discovery/data/VisualGenome/VG_100K'
 RCNN_CHECKPOINT_FN = path('faster_rcnn_500k.h5')
 
 IM_DATA_FN = stanford_path('image_data.json')
-VG_SGG_FN = stanford_path('10R-full-VG-SGG.h5')
-VG_SGG_DICT_FN = stanford_path('10R-full-VG-SGG-dicts.json')
+VG_SGG_FN = stanford_path('10R-baseline-VG-SGG.h5')
+VG_SGG_DICT_FN = stanford_path('10R-baseline-VG-SGG-dicts.json')
 PROPOSAL_FN = stanford_path('proposals.h5')
 
 COCO_PATH = '/home/rowan/datasets/mscoco'
