@@ -10,8 +10,13 @@ if [ $1 == "0" ]; then
 
 elif [ $1 == "1" ]; then
     echo "TRAINING MOTIFNET"
-    CHECKPOINT_NAME=0511-reef0.95
-    DATA_PREFIX=9R-reef0.95
+    CHECKPOINT_NAME=0511-reef0.8
+    DATA_PREFIX=9R-reef-0.8
+
+elif [ $1 == "2" ]; then
+    echo "TRAINING ORACLE"
+    CHECKPOINT_NAME=0513-oracle
+    DATA_PREFIX=10R-oracle
 fi
 
 VG_SGG_FN=${DATA_PREFIX}-VG-SG.h5
