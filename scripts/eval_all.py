@@ -12,7 +12,7 @@ def replace_dataset_command(dataset_prefix):
     return replace_h5 + '; ' + replace_json 
 
 def get_relation_dataset_prefixes():
-    relations = ['carry', 'ride', 'eat', 'sit', 'park', 'lay', 'walk', 'hang', 'carry']
+    relations = ['carry', 'ride', 'eat', 'sit', 'park', 'lay', 'walk', 'hang', 'cover']
     prefixes = []
     for r in relations: 
         prefixes.append('test-' + r) 
@@ -35,8 +35,9 @@ def main(args):
     predcls_command = 'python models/eval_rels.py -m predcls -model motifnet -order leftright -nl_obj 2 -nl_edge 4 -b 6 -clip 5 -p 100 -hidden_dim 512 -pooling_dim 4096 -lr 1e-3 -ngpu 1 -test -nepoch 50 -use_bias -test -ckpt %s' % (latest_checkpoint)
 
     # combine commands
-    command = set_full_dataset_command + '; ' + sgcls_command + '; ' + predcls_command
-    command = add_logging_to_command(command, args.model_path, 'full') 
+    sgcls = add_logging_to_command(sgcls_command, args.model_path, 'full-sg')
+    pred = add_logging_to_command(predcls_command, args.model_path, 'full-pred')
+    command = set_full_dataset_command + '; ' + sgcls + '; ' + pred
 
     # get relation-level commands
     if args.relation_level_scores: 
@@ -44,8 +45,9 @@ def main(args):
         rel_commands = []
         for p in relation_prefixes: 
             set_rel_dataset_command = replace_dataset_command(p)
-            rel_command = set_rel_dataset_command + '; ' + sgcls_command + '; ' + predcls_command
-            rel_command = add_logging_to_command(rel_command, args.model_path, p)
+            sgcls = add_logging_to_command(sgcls_command, args.model_path, p + '-sg')
+            pred = add_logging_to_command(predcls_command, args.model_path, p + '-pred')
+            rel_command = set_rel_dataset_command + '; ' + sgcls + '; ' + pred
             rel_commands.append(rel_command)
         rel_commands = "; ".join(rel_commands)
 
